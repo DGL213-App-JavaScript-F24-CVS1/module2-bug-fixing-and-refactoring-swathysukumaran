@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+
+<body>
+    <header>
+        <h1>Tic Tac Toe</h1>
+        <p>A DGL 213 Game</p>
+    </header>
+
+    <main>
+        <h2>How to play</h2>
+        <p><strong>Goal:</strong> Get three of your marks (X or O) in a row, either horizontally, vertically, or
+            diagonally.</p>
+        <ul>
+            <li>Players take turns to click on a cell to place their mark.</li>
+            <li>The first player to get three marks in a row wins!</li>
+            <li>Use the <strong>Undo</strong> button to revert your last move.</li>
+            <li>Use the <strong>Restart</strong> button to start a new game.</li>
+        </ul>
+        <div>
+            <canvas id="gameCanvas" width="300" height="300"></canvas>
+        </div>
+        <div id="winner-message"></div>
+        <div>
+            <button id="restart">Restart</button>
+            <button id="undo">Undo</button>
+            <div id="score">
+                <p>Current Turn: <span id="current-player"></span></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Tic Tac Toe - A DGL 213 Game</p>
+    </footer>
+    <script src="tictactoe.js"></script>
+</body>
+
+</html>
