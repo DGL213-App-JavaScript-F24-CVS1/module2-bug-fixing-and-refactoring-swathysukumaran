@@ -101,9 +101,7 @@
             render(grids[grids.length - 1]);
         }
 
-        function updatePlayerScore() {
-            playerScore = playerScore > 0 ? playerScore -= 1 : 0;
-        }
+
 
         function floodFill(grid, gridCoordinate, colorToChange) {
             if (arraysAreEqual(colorToChange, replacementColor)) { return } //The current cell is already the selected color
@@ -130,11 +128,12 @@
         // *****************************************************************************
         // #region Event Listeners
 
+
         canvas.addEventListener("mousedown", gridClickHandler);
         function gridClickHandler(event) {
-            updatePlayerScore();
-            updateGridAt(event.offsetX, event.offsetY);
+            updateGridAt(event.offsetX, event.offsetY); // This triggers floodFill, where the score is now updated
         }
+
 
         restartButton.addEventListener("mousedown", restartClickHandler);
         function restartClickHandler() {
