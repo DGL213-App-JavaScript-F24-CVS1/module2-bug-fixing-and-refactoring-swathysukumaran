@@ -51,8 +51,15 @@
                     }
                 }
             }
-            currentPlayerText.textContent = currentPlayer;
+
+            const winner = checkWin(); // Check for a winner
+            if (winner) {
+                document.querySelector("#winner-message").textContent = `${winner} wins!`; // Display the winner
+            } else {
+                currentPlayerText.textContent = currentPlayer; // Update current player text
+            }
         }
+
 
         function updateGridAt(mousePositionX, mousePositionY) {
             const row = Math.floor(mousePositionY / CELL_HEIGHT);
