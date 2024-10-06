@@ -73,7 +73,15 @@
         function restart() {
             startGame();
         }
+        function undoLastMove() {
 
+            if (history.length > 0) {
+                const lastMove = history.pop(); // Get the last move
+                grid[lastMove.row][lastMove.column] = null; // Reset the corresponding cell
+                switchPlayer(); // Switch back to the previous player
+                render();
+            }
+        }
         // #endregion
 
         // *****************************************************************************
@@ -92,6 +100,7 @@
         });
 
         restartButton.addEventListener("mousedown", restart);
+        undoButton.addEventListener("mousedown", undoLastMove);
 
         // #endregion
 
