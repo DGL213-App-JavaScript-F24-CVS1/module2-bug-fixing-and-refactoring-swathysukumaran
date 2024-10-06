@@ -97,9 +97,12 @@
         function updateGridAt(mousePositionX, mousePositionY) {
             const gridCoordinates = convertCartesiansToGrid(mousePositionX, mousePositionY);
             const newGrid = grids[grids.length - 1].slice();
-            floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column])
-            grids.push(newGrid);
-            render(grids[grids.length - 1]);
+            const originalColor = newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column];
+            floodFill(newGrid, gridCoordinates, originalColor);
+            if (!arraysAreEqual(originalColor, replacementColor)) { // Only render if the color is different
+                grids.push(newGrid);
+                needsRender = true; // Set render flag to true
+            }
         }
 
 
