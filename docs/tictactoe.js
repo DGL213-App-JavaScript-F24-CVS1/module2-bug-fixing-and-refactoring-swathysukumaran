@@ -65,13 +65,14 @@
             const row = Math.floor(mousePositionY / CELL_HEIGHT);
             const column = Math.floor(mousePositionX / CELL_WIDTH);
 
-            if (grid[row][column] === null) { // Only update if cell is empty
+            if (grid[row][column] === null && !checkWin()) { // Only update if cell is empty and no winner
                 grid[row][column] = currentPlayer;
                 history.push({ row, column, player: currentPlayer }); // Save move for undo
                 switchPlayer(); // Switch to the next player
                 needsRender = true; // Set render flag to true
             }
         }
+
 
         function switchPlayer() {
             currentPlayer = currentPlayer === "X" ? "O" : "X"; // Toggle between X and O
