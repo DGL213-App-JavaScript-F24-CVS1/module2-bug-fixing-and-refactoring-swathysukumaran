@@ -33,6 +33,7 @@
         let replacementColor = CELL_COLORS.white;
         let grids;
         let playerScore = MAXIMUM_SCORE;
+        let needsRender = false; // Flag to check if rendering is needed
 
         // #endregion
 
@@ -96,7 +97,7 @@
         function updateGridAt(mousePositionX, mousePositionY) {
             const gridCoordinates = convertCartesiansToGrid(mousePositionX, mousePositionY);
             const newGrid = grids[grids.length - 1].slice();
-            floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.column * CELLS_PER_AXIS + gridCoordinates.row])
+            floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column])
             grids.push(newGrid);
             render(grids[grids.length - 1]);
         }
@@ -104,6 +105,8 @@
 
 
         function floodFill(grid, gridCoordinate, colorToChange) {
+            console.log("colorToChange:", colorToChange);
+            console.log("replacementColor:", replacementColor);
             if (arraysAreEqual(colorToChange, replacementColor)) { return } //The current cell is already the selected color
             else if (!arraysAreEqual(grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column], colorToChange)) { return }  //The current cell is a different color than the initially clicked-on cell
             else {
