@@ -65,7 +65,7 @@
         function rollBackHistory() {
             if (grids.length > 0) {
                 grids = grids.slice(0, grids.length - 1);
-                render(grids[grids.length - 1]);
+                needsRender = true; // Set the flag to true
             }
         }
 
@@ -83,7 +83,7 @@
                 }
                 grids[i] = currentGrid;
             }
-            render(grids[grids.length - 1]);
+            needsRender = true; // Set the flag to true needsRender = true; 
         }
 
         function render(grid) {
@@ -99,7 +99,7 @@
             const newGrid = grids[grids.length - 1].slice();
             floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column])
             grids.push(newGrid);
-            render(grids[grids.length - 1]);
+            needsRender = true; // Set the flag to true
         }
 
 
@@ -135,6 +135,11 @@
         canvas.addEventListener("mousedown", gridClickHandler);
         function gridClickHandler(event) {
             updateGridAt(event.offsetX, event.offsetY); // This triggers floodFill, where the score is now updated
+            // Call render once if needed
+            if (needsRender) {
+                render(grids[grids.length - 1]); // Call render only once
+                needsRender = false; // Reset the flag
+            }
         }
 
 
@@ -146,6 +151,11 @@
         undoButton.addEventListener("mousedown", undoLastMove);
         function undoLastMove() {
             rollBackHistory();
+            // Call render only if we have a valid grid to render
+            if (needsRender) {
+                render(grids[grids.length - 1]); // Call render only once
+                needsRender = false; // Reset the flag
+            }
         }
 
         rotateButton.addEventListener("mousedown", rotateGrid);
