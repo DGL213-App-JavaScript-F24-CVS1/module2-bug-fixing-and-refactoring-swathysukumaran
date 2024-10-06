@@ -13,6 +13,7 @@
         const restartButton = document.querySelector("#restart");
         const undoButton = document.querySelector('#undo');
         const currentPlayerText = document.querySelector('#current-player');
+        const winnerMessageText = document.querySelector("#winner-message")
 
         // Constants
         const CELLS_PER_AXIS = 3; // 3x3 grid
@@ -35,6 +36,7 @@
             currentPlayer = "X"; // Reset to Player 1
             history = []; // Reset history
             needsRender = true; // Set render flag to true
+            winnerMessageText.textContent = "";
             render(); // Initial render
         }
 
@@ -54,7 +56,7 @@
 
             const winner = checkWin(); // Check for a winner
             if (winner) {
-                document.querySelector("#winner-message").textContent = `${winner} wins!`; // Display the winner
+                winnerMessageText.textContent = `${winner} wins!`; // Display the winner
             } else {
                 currentPlayerText.textContent = currentPlayer; // Update current player text
             }
