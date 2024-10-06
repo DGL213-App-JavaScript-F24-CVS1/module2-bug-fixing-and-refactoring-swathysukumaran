@@ -57,6 +57,8 @@
             const winner = checkWin(); // Check for a winner
             if (winner) {
                 winnerMessageText.textContent = `${winner} wins!`; // Display the winner
+            } else if (history.length === 9) {
+                winnerMessageText.textContent = "It's a tie!"; // Display tie message
             } else {
                 currentPlayerText.textContent = currentPlayer; // Update current player text
             }
